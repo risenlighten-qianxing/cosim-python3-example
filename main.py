@@ -16,7 +16,10 @@ def run():  # 8.146.201.197:30080 31244
     token = ''
     metadata = [('authorization', 'Bearer ' + token)]
 
-    with grpc.secure_channel('qianxing-grpc.risenlighten.com', credentials) as channel:
+    #  创建非TLS连接
+    # with grpc.insecure_channel('qianxing-grpc.risenlighten.com:80') as channel:
+    # 创建TLS连接
+    with grpc.secure_channel('qianxing-grpc.risenlighten.com:443', credentials) as channel:
         # with grpc.insecure_channel('8.146.201.197:30081') as channel:
         # with grpc.insecure_channel('120.46.203.61:9001') as channel:
         stub = simulation_pb2_grpc.CosimStub(channel)
